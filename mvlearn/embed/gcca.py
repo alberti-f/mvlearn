@@ -251,11 +251,13 @@ class GCCA(BaseEmbed):
 
         return self
 
-    def _fit_view(self, X, n, min_m):
+    def _fit_view(self, X, n, min_m, copy=True):
         """
         Helper function to compute SVD on each view.
         """
         # Preprocess
+        if copy:
+            X = X.copy()
         X[np.isnan(X)] = 0
 
         # compute the SVD of the data
